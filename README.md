@@ -1,6 +1,6 @@
 # Three-Stage Discrete Multistage Amplifier
 
-A discrete **CS–CE–EF** amplifier delivering **25 V/V** gain into a 50 Ω load on a **single 15 V supply**, with **>200 kΩ** input resistance and **<25 Ω** output resistance. Designed by hand, verified in LTspice, then built and measured on the bench — with hand calculation, simulation, and measurement cross-checked at every step.
+A discrete **CS–CE–EF** amplifier delivering **25 V/V** gain into a 50 Ω load on a **single 15 V supply**, with **>200 kΩ** input resistance and **<25 Ω** output resistance. Designed by hand, verified in LTspice, then built and measured on the bench with hand calculation, simulation, and measurements cross-checked at every step.
 
 ## Results at a glance
 
@@ -18,7 +18,7 @@ A discrete **CS–CE–EF** amplifier delivering **25 V/V** gain into a 50 Ω lo
 
 ## Architecture
 
-The circuit splits three competing requirements — high input resistance, 25 V/V gain, and a low-impedance drive into 50 Ω — across three stages, so no single transistor has to do everything at once. It was **designed from the load backward**, since each stage is loaded by the one that follows and the 50 Ω load is fixed.
+The circuit splits three competing requirements of high input resistance, 25 V/V gain, and a low-impedance drive into 50 Ω across three stages, so no single transistor has to do everything at once. It was **designed from the load backward**, since each stage is loaded by the one that follows and the 50 Ω load is fixed.
 
 | Stage | Device / config | Job | Gain |
 |---|---|---|---|
@@ -30,11 +30,11 @@ The circuit splits three competing requirements — high input resistance, 25 V/
 
 ## Design decisions worth calling out
 
-**Split degeneration resistors.** Each gain stage uses a bypassed + unbypassed resistor pair (RS1/RS2, RE1/RE2). The bypassed resistor sets the DC bias point; the unbypassed one sets AC gain. This lets gain be tuned without disturbing the operating point — the unbypassed values were adjusted in simulation to land the gain instead of re-biasing the whole stage.
+**Split degeneration resistors.** Each gain stage uses a bypassed + unbypassed resistor pair (RS1/RS2, RE1/RE2). The bypassed resistor sets the DC bias point; the unbypassed one sets AC gain. This lets gain be tuned without disturbing the operating point, the unbypassed values were adjusted in simulation to land the gain instead of re-biasing the whole stage.
 
 **Designing the sim gain high on purpose.** RC1 is upper-bounded by the output-resistance spec (RC1/(β+1) < 25 Ω). Rather than sit at that limit, it was set to 6 kΩ to push the *simulated* gain to ~28 dB, anticipating that real breadboard components measure lower than their models. Building in margin toward the spec instead of centering on it.
 
-**Output-stage power budget.** The emitter follower runs ~85 mA through RE3, dissipating **~715 mW** — far past a ¼ W resistor's rating — so RE3 was implemented as a **100 Ω 5 W power resistor**. Q2 itself dissipates ~553 mW, close to the 2N2222A's 625 mW limit, which is what capped how hard the output stage could be pushed.
+**Output-stage power budget.** The emitter follower runs ~85 mA through RE3, dissipating **~715 mW** which is far past a ¼ W resistor's rating, so RE3 was implemented as a **100 Ω 5 W power resistor**. Q2 itself dissipates ~553 mW, close to the 2N2222A's 625 mW limit, which is what capped how hard the output stage could be pushed.
 
 **One dominant low-frequency pole.** The coupling/bypass capacitors were sized so the source-bypass cap C2 sets the dominant pole (~48 Hz) and everything else sits sub-dominant, giving a clean, predictable low-frequency roll-off.
 
@@ -49,7 +49,7 @@ The circuit splits three competing requirements — high input resistance, 25 V/
 
 ## Bench observations (what the datasheet doesn't tell you)
 
-- **Thermal gain drift.** Gain measured 26–28 V/V at demonstration but crept to ~30 V/V after roughly an hour of continuous operation. Root cause: VBE falls with temperature, shifting the bias point and raising gain. This nudged the midband slightly outside the ±5% window during the later Bode run — documented rather than hidden.
+- **Thermal gain drift.** Gain measured 26–28 V/V at demonstration but crept to ~30 V/V after roughly an hour of continuous operation. Root cause: VBE falls with temperature, shifting the bias point and raising gain. This nudged the midband slightly outside the ±5% window during the later Bode run which was documented rather than hidden.
 - **Calc vs. sim vs. bench.** First-order hand analysis overpredicted stage-2 gain (~33 V/V) because it ignores the Early effect and device non-idealities; simulation and measurement agreed much more closely at ~25–30 V/V. A good reminder of where the small-signal model stops being enough.
 - **High-frequency peaking (unresolved).** Gain rose above 200 kHz, peaking near ~1.2 MHz before dipping back to midband. Suspected interaction between the output coupling capacitor, the load, and the output-stage emitter — flagged for follow-up rather than papered over.
 
