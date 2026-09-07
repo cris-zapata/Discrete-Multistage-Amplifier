@@ -47,11 +47,11 @@ The circuit splits three competing requirements of high input resistance, 25 V/V
 
 ![Measured Bode magnitude plot](docs/bode_measured.png)
 
-## Bench observations (what the datasheet doesn't tell you)
+## Bench observations
 
 - **Thermal gain drift.** Gain measured 26–28 V/V at demonstration but crept to ~30 V/V after roughly an hour of continuous operation. Root cause: VBE falls with temperature, shifting the bias point and raising gain. This nudged the midband slightly outside the ±5% window during the later Bode run which was documented rather than hidden.
 - **Calc vs. sim vs. bench.** First-order hand analysis overpredicted stage-2 gain (~33 V/V) because it ignores the Early effect and device non-idealities; simulation and measurement agreed much more closely at ~25–30 V/V. A good reminder of where the small-signal model stops being enough.
-- **High-frequency peaking (unresolved).** Gain rose above 200 kHz, peaking near ~1.2 MHz before dipping back to midband. Suspected interaction between the output coupling capacitor, the load, and the output-stage emitter — flagged for follow-up rather than papered over.
+- **High-frequency peaking (unresolved).** Gain rose above 200 kHz, peaking near ~1.2 MHz before dipping back to midband. Suspected interaction between the output coupling capacitor, the load, and the output-stage emitter, this was flagged for follow-up rather than looked over.
 
 ## Bill of materials
 
