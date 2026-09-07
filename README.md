@@ -43,7 +43,7 @@ The circuit splits three competing requirements — high input resistance, 25 V/
 - **Input resistance** — series-resistor method: a 427.9 kΩ resistor was placed in series at the input and the source-side vs. amplifier-side voltages were used to back out Rin = Rₖ·V₂/(V₁−V₂).
 - **Output resistance** — two-load Thévenin method: measured Vout unloaded (5.00 V) and into 50 Ω (3.76 V), giving Rout = RL·(V_nl/V_l − 1) = 16.5 Ω.
 - **Max swing** — input raised until the output clipped; 4.72 Vpp undistorted, clipping onset just beyond.
-- **Frequency response** — swept and plotted as a Bode magnitude plot in MATLAB (`matlab/bode_plot.m`, data in `data/bode_sweep.csv`).
+- **Frequency response** — swept and plotted as a Bode magnitude plot in MATLAB.
 
 ![Measured Bode magnitude plot](docs/bode_measured.png)
 
@@ -62,17 +62,12 @@ The circuit splits three competing requirements — high input resistance, 25 V/
 ## Repository structure
 
 ```
-├── docs/          # schematic, LTspice + measured Bode plots, scope captures
-├── sim/           # LTspice .asc file
-├── matlab/        # bode_plot.m
-├── data/          # bode_sweep.csv (measured frequency response)
+├── docs/          # Final LTSpice Schematic, Measured Bode plot on MATLAB
 └── README.md
 ```
 
 ## Tools
 
-Hand analysis · LTspice · MATLAB · bench (oscilloscope, function generator, DMM)
+Hand analysis · LTspice · MATLAB · bench (oscilloscope, function generator, Multimeter)
 
 ---
-
-*Built as a two-person course lab. This writeup documents the design and analysis; construction and measurement were shared with a lab partner.* <!-- EDIT THIS LINE: name your partner if they're OK being credited publicly, or leave it generic as-is. Do NOT present the joint work as solo. -->
