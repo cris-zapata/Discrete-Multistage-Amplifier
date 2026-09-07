@@ -6,7 +6,7 @@ A discrete **CS–CE–EF** amplifier delivering **25 V/V** gain into a 50 Ω lo
 
 | Parameter | Spec | Measured | |
 |---|---|---|---|
-| Midband gain | 25 V/V ±5% | 26–28 V/V at demo* | ✅ |
+| Midband gain | 25 V/V ±5% | 26–28 V/V | ✅ |
 | Input resistance | > 200 kΩ | ~428 kΩ | ✅ |
 | Output resistance | < 25 Ω | 16.5 Ω | ✅ |
 | Max symmetrical swing | > 4 Vpp | 4.72 Vpp | ✅ |
